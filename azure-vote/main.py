@@ -35,7 +35,7 @@ from datetime import datetime
 #         connection_string='InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
 #     ),
 #     sampler=ProbabilitySampler(1.0)
-)
+# )
 
 app = Flask(__name__)
 
