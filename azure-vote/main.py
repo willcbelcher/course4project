@@ -8,43 +8,43 @@ import logging
 from datetime import datetime
 
 # App Insights
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace.samplers import ProbabilitySampler
-from opencensus.trace.tracer import Tracer
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
+# from opencensus.ext.azure.log_exporter import AzureLogHandler
+# from opencensus.ext.azure import metrics_exporter
+# from opencensus.stats import aggregation as aggregation_module
+# from opencensus.stats import measure as measure_module
+# from opencensus.stats import stats as stats_module
+# from opencensus.stats import view as view_module
+# from opencensus.tags import tag_map as tag_map_module
+# from opencensus.ext.azure.trace_exporter import AzureExporter
+# from opencensus.trace.samplers import ProbabilitySampler
+# from opencensus.trace.tracer import Tracer
+# from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 
 # Logging
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 # Metrics
-exporter = metrics_exporter.new_metrics_exporter(
-    enable_standard_metrics = True,
-    connection_string='InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
+# exporter = metrics_exporter.new_metrics_exporter(
+#     enable_standard_metrics = True,
+#     connection_string='InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
 )
 
 # Tracing
-tracer = Tracer(
-    exporter=AzureExporter(
-        connection_string='InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
-    ),
-    sampler=ProbabilitySampler(1.0)
+# tracer = Tracer(
+#     exporter=AzureExporter(
+#         connection_string='InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
+#     ),
+#     sampler=ProbabilitySampler(1.0)
 )
 
 app = Flask(__name__)
 
 # Requests
-middleware = FlaskMiddleware(
-    app,
-    exporter=AzureExporter(connection_string="InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/"),
-    sampler = ProbabilitySampler(rate=1.0)
-)
+# middleware = FlaskMiddleware(
+#     app,
+#     exporter=AzureExporter(connection_string="InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/"),
+#     sampler = ProbabilitySampler(rate=1.0)
+# )
 
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
@@ -66,6 +66,7 @@ else:
 
 # Redis Connection
 r = redis.Redis()
+print(r)
 
 # Change title to host name to demo NLB
 if app.config['SHOWHOST'] == "true":
@@ -82,9 +83,9 @@ def index():
 
         # Get current values
         vote1 = r.get(button1).decode('utf-8')
-        tracer.span(name="CAT VOTE")
+        # tracer.span(name="CAT VOTE")
         vote2 = r.get(button2).decode('utf-8')
-        tracer.span(name="DOG VOTE")
+        # tracer.span(name="DOG VOTE")
 
         # Return index with values
         return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
@@ -98,11 +99,11 @@ def index():
             r.set(button2,0)
             vote1 = r.get(button1).decode('utf-8')
             properties = {'custom_dimensions': {'Cats Vote': vote1}}
-            logger.info("Cat vote has been logged")
+            # logger.info("Cat vote has been logged")
 
             vote2 = r.get(button2).decode('utf-8')
             properties = {'custom_dimensions': {'Dogs Vote': vote2}}
-            logger.info("Dog vote has been logged")
+            # logger.info("Dog vote has been logged")
 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
