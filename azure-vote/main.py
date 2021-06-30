@@ -27,7 +27,7 @@ from datetime import datetime
 # exporter = metrics_exporter.new_metrics_exporter(
 #     enable_standard_metrics = True,
 #     connection_string='InstrumentationKey=a808f202-229e-4d87-bbb5-c7a7aa9e629c;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
-)
+# )
 
 # Tracing
 # tracer = Tracer(
