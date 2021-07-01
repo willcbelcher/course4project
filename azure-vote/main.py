@@ -27,7 +27,7 @@ handler = AzureLogHandler(connection_string='InstrumentationKey=46b15061-8019-46
 handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
 logger.addHandler(handler)
 logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=46b15061-8019-463f-8296-48fad2175941;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'))
-logger.setLevel(logging.info)
+logger.setLevel(logging.INFO)
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
