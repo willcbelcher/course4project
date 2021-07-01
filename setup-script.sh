@@ -65,7 +65,7 @@ az vmss create `
   --custom-data cloud-init.txt `
   --upgrade-policy-mode automatic `
   --admin-username $adminName `
-  --generate-ssh-keys ` 
+  --generate-ssh-keys `
   --verbose
 
 echo "VM scale set created: $vmssName"
@@ -90,7 +90,7 @@ az network lb probe create `
   --lb-name $lbName `
   --name $probeName `
   --protocol tcp `
-  --port 80 ` 
+  --port 80 `
   --interval 5 `
   --threshold 2 `
   --verbose 
