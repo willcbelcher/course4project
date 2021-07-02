@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Variables
-resourceGroup="acdnd-c4-project"
-clusterName="udacity-cluster"
+$resourceGroup="acdnd-c4-project"
+$clusterName="udacity-cluster"
 
 # Install aks cli
 echo "Installing AKS CLI"
@@ -14,11 +14,11 @@ echo "AKS CLI installed"
 # Create AKS cluster
 echo "Creating AKS cluster $clusterName"
 
-az aks create \
---resource-group $resourceGroup \
---name $clusterName \
---node-count 1 \
---enable-addons monitoring \
+az aks create `
+--resource-group $resourceGroup `
+--name $clusterName `
+--node-count 1 `
+--enable-addons monitoring `
 --generate-ssh-keys
 
 echo "AKS cluster created: $clusterName"
@@ -27,9 +27,9 @@ echo "AKS cluster created: $clusterName"
 
 echo "Getting AKS credentials"
 
-az aks get-credentials \
---resource-group $resourceGroup \
---name $clusterName \
+az aks get-credentials `
+--resource-group $resourceGroup `
+--name $clusterName `
 --verbose
 
 echo "Verifying connection to $clusterName"
